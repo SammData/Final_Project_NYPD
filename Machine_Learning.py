@@ -142,6 +142,3 @@ import matplotlib.pyplot as plt
 
 plt.figure(figsize=(8, 8))
 sns.barplot(y=ct.get_feature_names(), x=clf.coef_[0])
-
-
-# %%

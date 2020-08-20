@@ -289,8 +289,3 @@ import numpy as np
 
 # %%
 df.to_pickle("sqf.pkl")
-
-# %%
-
-
-# %%

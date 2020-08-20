@@ -4,9 +4,7 @@ import pandas as pd
 from mlxtend.frequent_patterns import apriori
 from mlxtend.frequent_patterns import association_rules
 
-
 df = pd.read_pickle("sqf.pkl")
-
 
 # %% select some yes/no columns to convert into a dataframe of boolean values
 pfs = [col for col in df.columns if col.startswith("pf_")]
@@ -24,7 +22,6 @@ stopped = [
 
 x = df[pfs + stopped]
 x = x == "YES"
-
 
 # %% create a new column to represent whether a person is armed
 x["stopped"] = (
@@ -49,16 +46,12 @@ for val in df["city"].value_counts().index:
 for val in df["sex"].value_counts().index:
     x[f"sex_{val}"] = df["sex"] == val
 
-
-
-
     # %% apply frequent itemsets mining, make sure you play around of the support level
 frequent_itemsets = apriori(x, min_support=0.01, use_colnames=True)
 
 # %% apply association rules mining
 rules = association_rules(frequent_itemsets, min_threshold=0.5)
 rules
-
 
 # %% sort rules by confidence and select rules within "armed" in it
 rules.sort_values("confidence", ascending=False)[
@@ -77,10 +70,4 @@ rules
 rules[ (rules['antecedent_len'] >= 2) &
        (rules['confidence'] == 1) &
        (rules['support'] > 0.3) ]
-
-
-
-
-
-
 
