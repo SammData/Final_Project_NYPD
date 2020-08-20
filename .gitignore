@@ -3,5 +3,5 @@
 *.xlsx
 venv
 *.png
-*.DS_Store
-**/.vscode/
+.DS_Store.
+.vscode.
